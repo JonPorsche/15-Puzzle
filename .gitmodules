@@ -1,0 +1,3 @@
+[submodule "board-of-symbols"]
+	path = board-of-symbols
+	url = https://github.com/stephaneuler/board-of-symbols.git

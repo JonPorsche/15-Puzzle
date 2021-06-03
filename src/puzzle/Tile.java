@@ -2,26 +2,38 @@ package puzzle;
 
 public class Tile {
 	
-	public static final double TILE_SIZE = 0.5;
-	public static final String FORM = "Frame";
+	public static final double TILE_SIZE = 0.475;
+	public static final String FORM = "Square";
 	private int x;
 	private int y;
-	private int color;
-	private int backgroundColor;
 	private int number;
 	private int numberColor;
+	private int foregroundColor;
+	private int backgroundColor;
 	private boolean isClickable;
 	
-	public Tile(int x, int y, int color, int number, int numberColor, int backgroundColor, boolean isClickable) {
+	public Tile(int x, int y, int number, int numberColor, int foregroundColor, int backgroundColor, boolean isClickable) {
 		super();
 		this.x = x;
 		this.y = y;
-		this.color = color;
+		this.foregroundColor = foregroundColor;
 		this.number = number;
 		this.numberColor = numberColor;
 		this.backgroundColor = backgroundColor;
 		this.isClickable = isClickable;
 	}
+
+
+	public Tile() {
+		super();
+	}
+
+	@Override
+	public String toString() {
+		return "Tile [x=" + x + ", y=" + y + ", color=" + foregroundColor + ", backgroundColor=" + backgroundColor + ", number="
+				+ number + ", numberColor=" + numberColor + ", isClickable=" + isClickable + "]";
+	}
+
 
 	public int getX() {
 		return x;
@@ -39,12 +51,12 @@ public class Tile {
 		this.y = y;
 	}
 
-	public int getTileColor() {
-		return color;
+	public int getForegroundColor() {
+		return foregroundColor;
 	}
 
-	public void setTileColor(int tileColor) {
-		this.color = tileColor;
+	public void setForegroundColor(int foregroundColor) {
+		this.foregroundColor = foregroundColor;
 	}
 
 	public int getNumber() {

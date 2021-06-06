@@ -1,5 +1,8 @@
 package puzzle;
 
+import jserver.XSendAdapter;
+import jserver.XSendAdapterEN;
+
 public class Tile {
 	
 	public static final double TILE_SIZE = 0.475;
@@ -90,6 +93,5 @@ public class Tile {
 	public void setClickable(boolean isClickable) {
 		this.isClickable = isClickable;
 	}
-	
 	
 }

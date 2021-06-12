@@ -1,6 +1,6 @@
 package puzzle;
 
-public class Tile {
+public class GameElement {
 	
 	public static final double TILE_SIZE = 0.475;
 	public static final String FORM = "Square";
@@ -10,9 +10,8 @@ public class Tile {
 	private int numberColor;
 	private int foregroundColor;
 	private int backgroundColor;
-	private boolean isClickable;
 	
-	public Tile(int x, int y, int number, int numberColor, int foregroundColor, int backgroundColor, boolean isClickable) {
+	public GameElement(int x, int y, int number, int numberColor, int foregroundColor, int backgroundColor) {
 		super();
 		this.x = x;
 		this.y = y;
@@ -20,18 +19,17 @@ public class Tile {
 		this.number = number;
 		this.numberColor = numberColor;
 		this.backgroundColor = backgroundColor;
-		this.isClickable = isClickable;
 	}
 
 
-	public Tile() {
+	public GameElement() {
 		super();
 	}
 
 	@Override
 	public String toString() {
 		return "Tile [x=" + x + ", y=" + y + ", color=" + foregroundColor + ", backgroundColor=" + backgroundColor + ", number="
-				+ number + ", numberColor=" + numberColor + ", isClickable=" + isClickable + "]";
+				+ number + ", numberColor=" + numberColor + "]";
 	}
 
 
@@ -81,14 +79,6 @@ public class Tile {
 
 	public void setBackgroundColor(int backgroundColor) {
 		this.backgroundColor = backgroundColor;
-	}
-
-	public boolean isClickable() {
-		return isClickable;
-	}
-
-	public void setClickable(boolean isClickable) {
-		this.isClickable = isClickable;
 	}
 	
 }

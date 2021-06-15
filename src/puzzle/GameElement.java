@@ -3,7 +3,7 @@ package puzzle;
 public class GameElement {
 	
 	public static final double TILE_SIZE = 0.475;
-	public static final String FORM = "Square";
+	public static final String FORM = "s";
 	private int x;
 	private int y;
 	private int number;
@@ -28,8 +28,7 @@ public class GameElement {
 
 	@Override
 	public String toString() {
-		return "Tile [x=" + x + ", y=" + y + ", color=" + foregroundColor + ", backgroundColor=" + backgroundColor + ", number="
-				+ number + ", numberColor=" + numberColor + "]";
+		return "\nGame Element "+number+" ("+x+", "+y+")";
 	}
 
 

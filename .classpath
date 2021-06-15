@@ -5,6 +5,8 @@
 	<classpathentry kind="src" path="board-of-symbols/demos"/>
 	<classpathentry kind="src" path="board-of-symbols/java/demos"/>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="test"/>
 	<classpathentry kind="lib" path="/Users/jonporsche/eclipse-workspace-2020-06/15-Puzzle/board-of-symbols/jserver.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

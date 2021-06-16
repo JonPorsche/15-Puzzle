@@ -36,10 +36,8 @@ public class FifteenPuzzle implements BoardClickListener {
 	
 	private void getTileNrs() {
 		for(int i = 0; i < elements.length; i++) {
-			System.out.print(elements[i].getNumber() + ", ");
 			tileNrs[i] = elements[i].getNumber();
 		}
-		System.out.println(Arrays.toString(tileNrs));
 	}
 
 	// > GameBoard
@@ -101,6 +99,8 @@ public class FifteenPuzzle implements BoardClickListener {
 
 		// Move tiles in the direction
 		moveElements(direction, clickedX, clickedY, holeX, holeY);
+		getTileNrs();
+		gameLogic.isSolved(tileNrs);
 	}
 	
 	public void moveElements(int direction, int clickedX, int clickedY, int holeX, int holeY) {

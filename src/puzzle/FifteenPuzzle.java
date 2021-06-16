@@ -1,11 +1,7 @@
 package puzzle;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import java.util.Random;
-
 import jserver.Board;
 import jserver.BoardClickEvent;
 import jserver.BoardClickListener;
@@ -14,16 +10,17 @@ import jserver.XSendAdapterEN;
 
 public class FifteenPuzzle implements BoardClickListener {
 
-	private XSendAdapterEN xsend = new XSendAdapterEN();
-	private int boardSize = 4;
-	private GameElement[] elements = new GameElement[boardSize * boardSize];
-	private int[] element2DCoords = new int[2];
-	private int clickedPosition1D;
-	private int holePosition1D;
-	private Board board = xsend.getBoard();
-	private static final Random RANDOM = new Random();
-	protected static int[][] grid = new int[][]{{1,2,3,4},{5,6,7,8},{9,10,11,12},{13,14,15,16}};
-	protected static int[] coords = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
+	private XSendAdapterEN xsend = new XSendAdapterEN(); // > GameBoard
+	private static int boardSize = 4; // > GameBoard
+	public GameElement[] elements = new GameElement[boardSize * boardSize]; // > GameBoard
+	private int[] element2DCoords = new int[2]; // > GameElement
+	private int clickedPosition1D; // > GameBoard
+	private int holePosition1D; // > GameBoard
+	private Board board = xsend.getBoard(); // > GameBoard
+	private static final Random RANDOM = new Random(); // > GameLogic
+	private GameLogic gameLogic = new GameLogic();
+	private int[] tileNrs = new int[16];
+
 	public static void main(String[] args) {
 		FifteenPuzzle fifteenPuzzle = new FifteenPuzzle();
 		fifteenPuzzle.start();
@@ -33,6 +30,19 @@ public class FifteenPuzzle implements BoardClickListener {
 		setUpBoard();
 	}
 
+	public GameElement[] getElements() {
+		return elements;
+	}
+	
+	private void getTileNrs() {
+		for(int i = 0; i < elements.length; i++) {
+			System.out.print(elements[i].getNumber() + ", ");
+			tileNrs[i] = elements[i].getNumber();
+		}
+		System.out.println(Arrays.toString(tileNrs));
+	}
+
+	// > GameBoard
 	private void setUpBoard() {
 		xsend.size(boardSize, boardSize);
 		xsend.symbolSizes(GameElement.TILE_SIZE);
@@ -40,9 +50,12 @@ public class FifteenPuzzle implements BoardClickListener {
 		board.addClickListener(this);
 		createElements();
 		shuffle();
+		getTileNrs();
+		System.out.println(gameLogic.isSolvable(tileNrs));
 		renderElements();
 	}
 
+	// > GameBoard
 	public void createElements() {
 		int index = 0;
 		int tileNumber;
@@ -61,7 +74,7 @@ public class FifteenPuzzle implements BoardClickListener {
 		}
 	}
 
-
+	// > GameBoard
 	@Override
 	public void boardClick(BoardClickEvent click) {
 
@@ -151,6 +164,7 @@ public class FifteenPuzzle implements BoardClickListener {
 
 	}
 
+	// > GameElement
 	private void getElement2DCoords(int tileNr) {
 		for (int i = 0; i < elements.length; i++) {
 			if (elements[i].getNumber() == tileNr) {
@@ -160,6 +174,7 @@ public class FifteenPuzzle implements BoardClickListener {
 		}
 	}
 
+	// > GameElement
 	private int convert2DCoordsTo1D(int x, int y) {
 		int position1D = x - 4 * y + 12;
 		return position1D;

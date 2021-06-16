@@ -49,9 +49,13 @@ public class FifteenPuzzle implements BoardClickListener {
 		xsend.forms(GameElement.FORM);
 		board.addClickListener(this);
 		createElements();
-		shuffle();
-		getTileNrs();
-		System.out.println(gameLogic.isSolvable(tileNrs));
+		
+		do {
+			shuffle();
+			getTileNrs();
+			//System.out.println(gameLogic.isSolvable(tileNrs));
+		} while(!gameLogic.isSolvable(tileNrs));
+	
 		renderElements();
 	}
 

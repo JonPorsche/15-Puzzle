@@ -12,7 +12,7 @@ public class GameLogic {
 				}
 			}
 		}
-		System.out.println("Inversions = " + countInversions);
+		//System.out.println("Inversions = " + countInversions);
 		return countInversions % 2 == 0;
 	}
 }

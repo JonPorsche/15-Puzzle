@@ -151,8 +151,8 @@ public class FifteenPuzzle implements BoardClickListener {
 
 	private void shuffle() {
 			int[] baseArray = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
-			for (int i = 0; i < baseArray.length; i++) {
-				int randomIndexToSwap = RANDOM.nextInt(baseArray.length);
+			for (int i = 0; i < baseArray.length-1; i++) {
+				int randomIndexToSwap = RANDOM.nextInt(baseArray.length-1);
 				int temp = baseArray[randomIndexToSwap];
 				baseArray[randomIndexToSwap] = baseArray[i];
 				baseArray[i] = temp;

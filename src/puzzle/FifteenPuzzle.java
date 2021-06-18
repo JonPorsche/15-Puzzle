@@ -110,7 +110,8 @@ public class FifteenPuzzle implements BoardClickListener {
 				int cachedTileNr = elements[newHolePosition1D].getNumber();
 				elements[newHolePosition1D].setNumber(16);
 				elements[holePosition1D].setNumber(cachedTileNr);
-				renderElements();
+				renderElement(elements[newHolePosition1D]);
+				renderElement(elements[holePosition1D]);
 				holePosition1D = newHolePosition1D;
 			}
 		}

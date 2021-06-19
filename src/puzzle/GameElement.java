@@ -1,5 +1,7 @@
 package puzzle;
 
+import java.util.Arrays;
+
 public class GameElement {
 	
 	public static final double TILE_SIZE = 0.475;
@@ -10,6 +12,8 @@ public class GameElement {
 	private int numberColor;
 	private int foregroundColor;
 	private int backgroundColor;
+	private int[] element2DCoords = new int[2];
+	private GameBoard gameBoard;
 	
 	public GameElement(int x, int y, int number, int numberColor, int foregroundColor, int backgroundColor) {
 		super();
@@ -79,5 +83,20 @@ public class GameElement {
 	public void setBackgroundColor(int backgroundColor) {
 		this.backgroundColor = backgroundColor;
 	}
-	
+
+	public int[] getElement2DCoords(GameElement[] elements, int tileNr) {
+		
+		for (int i = 0; i < elements.length; i++) {
+			if (elements[i].getNumber() == tileNr) {
+				element2DCoords[0] = elements[i].getX();
+				element2DCoords[1] = elements[i].getY();
+			}
+		}
+		return element2DCoords;
+	}
+
+	public int convert2DCoordsTo1D(int x, int y) {
+		int position1D = x - 4 * y + 12;
+		return position1D;
+	}
 }

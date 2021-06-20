@@ -86,6 +86,13 @@ public class GameBoard implements BoardClickListener{
 	@Override
 	public void boardClick(BoardClickEvent click) {
 		
+		// Start the timer when the user clicks on the tiles
+		if(!ButtonBar.timeControl.isStarted()) {
+			ButtonBar.timeControl.setStarted(true);
+			ButtonBar.timeControl.start();
+			ButtonBar.btnStart.setText("Stop");
+		}
+		
 		int clickedX = click.getX();
 		int clickedY = click.getY();
 		

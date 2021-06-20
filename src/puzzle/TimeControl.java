@@ -27,7 +27,8 @@ public class TimeControl {
 	});
 	
 	public TimeControl() {
-		InfoPanel.timeLabel.setText("Time: " + minutes_string + ":" + seconds_string);
+		super();
+		//InfoPanel.timeLabel.setText("Time: " + minutes_string + ":" + seconds_string);
 	}
 	
 	public boolean isStarted() {

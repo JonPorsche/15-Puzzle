@@ -3,13 +3,12 @@ package puzzle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
-import javax.swing.Timer;
 
 public class ButtonBar {
 
 	public JButton btnNewGame = new JButton("New Game");
 	public static JButton btnStart = new JButton("Start");
-	TimeControl timeControl = new TimeControl();
+	public static TimeControl timeControl = new TimeControl();
 
 
 	public void setUpButtonBar() {

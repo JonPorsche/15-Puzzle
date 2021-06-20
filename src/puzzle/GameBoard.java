@@ -13,6 +13,12 @@ public class GameBoard implements BoardClickListener{
 	private GameLogic gameLogic = new GameLogic();
 	private int[] tileNrs = new int[16];
 	private Move move = new Move();
+	private int movesCount = 0;
+	
+	public void setMoves(int moves) {
+		this.movesCount = moves;
+	}
+
 	private GameElement gameElement = new GameElement();
 
 	public GameBoard() {
@@ -130,6 +136,8 @@ public class GameBoard implements BoardClickListener{
 				renderer.renderElement(elements[holePosition1D]);
 				holePosition1D = newHolePosition1D;
 			}
+			movesCount++;
+			InfoPanel.movesLabel.setText("Moves: " + String.valueOf(movesCount));
 		}
 	}
 }

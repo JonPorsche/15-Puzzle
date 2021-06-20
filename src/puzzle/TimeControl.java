@@ -1,6 +1,5 @@
 package puzzle;
 
-import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
@@ -28,7 +27,6 @@ public class TimeControl {
 	
 	public TimeControl() {
 		super();
-		//InfoPanel.timeLabel.setText("Time: " + minutes_string + ":" + seconds_string);
 	}
 	
 	public boolean isStarted() {
@@ -56,6 +54,8 @@ public class TimeControl {
 		minutes_string = String.format("%02d", minutes);
 		InfoPanel.timeLabel.setText("Time: " + minutes_string + ":" + seconds_string);
 		gameBoard.setUpGameBoard();
+		gameBoard.setMoves(0);
+		InfoPanel.movesLabel.setText("Moves: 0");
 	}
 
 }

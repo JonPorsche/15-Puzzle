@@ -20,13 +20,14 @@ public class FifteenPuzzle {
 
 	public void start() {
 		BOARD.setSize(590, 500);
+		BOARD.receiveMessage(">>fontsize 40");
+		BOARD.receiveMessage(">>fonttype Rockwell");
 		GRAPHIC.removeAllMenus();
 		gameBoard.setUpGameBoard();
 		buttonBar.setUpButtonBar();
 		infoPanel.setUpInfoPanel();
 		XSEND.statusText("Order the tiles from 1 to 15.");
 		XSEND.border(XSendAdapterEN.LIGHTGRAY);
-
 	}
 
 }

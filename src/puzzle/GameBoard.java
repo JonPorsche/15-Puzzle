@@ -1,6 +1,5 @@
 package puzzle;
 
-import jserver.Board;
 import jserver.BoardClickEvent;
 import jserver.BoardClickListener;
 import jserver.XSendAdapterEN;
@@ -15,9 +14,7 @@ public class GameBoard implements BoardClickListener{
 	private int[] tileNrs = new int[16];
 	private Move move = new Move();
 	private GameElement gameElement = new GameElement();
-	public static final XSendAdapterEN xsend = new XSendAdapterEN();
-	private Board board = xsend.getBoard();
-	
+
 	public GameBoard() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -53,7 +50,7 @@ public class GameBoard implements BoardClickListener{
 
 	public void setUpGameBoard() {
 		Renderer renderer = new Renderer();
-		board.addClickListener(this);
+		FifteenPuzzle.BOARD.addClickListener(this);
 
 		createElements();
 		int count = 0;

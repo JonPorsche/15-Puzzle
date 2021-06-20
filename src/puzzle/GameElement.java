@@ -1,7 +1,5 @@
 package puzzle;
 
-import java.util.Arrays;
-
 public class GameElement {
 	
 	public static final double TILE_SIZE = 0.475;
@@ -13,7 +11,6 @@ public class GameElement {
 	private int foregroundColor;
 	private int backgroundColor;
 	private int[] element2DCoords = new int[2];
-	private GameBoard gameBoard;
 	
 	public GameElement(int x, int y, int number, int numberColor, int foregroundColor, int backgroundColor) {
 		super();

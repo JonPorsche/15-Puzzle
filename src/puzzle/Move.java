@@ -1,9 +1,6 @@
 package puzzle;
 
 public class Move {
-	
-	//private GameBoard gameBoard;
-	private Renderer renderer;
 
 	public Move() {
 		super();

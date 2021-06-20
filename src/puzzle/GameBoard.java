@@ -52,6 +52,7 @@ public class GameBoard implements BoardClickListener{
 		Renderer renderer = new Renderer();
 		FifteenPuzzle.BOARD.addClickListener(this);
 
+		
 		createElements();
 		int count = 0;
 		

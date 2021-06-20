@@ -51,7 +51,6 @@ public class GameBoard implements BoardClickListener{
 	public void setUpGameBoard() {
 		Renderer renderer = new Renderer();
 		FifteenPuzzle.BOARD.addClickListener(this);
-
 		
 		createElements();
 		int count = 0;
@@ -107,7 +106,7 @@ public class GameBoard implements BoardClickListener{
 		// Move tiles in the direction
 		moveElements(direction);
 		getTileNrs();
-		gameLogic.isSolved(tileNrs);
+		gameLogic.isSolved(tileNrs);		
 	}
 	
 	public void moveElements(int direction) {

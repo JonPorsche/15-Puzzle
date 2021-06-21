@@ -16,11 +16,11 @@ public class GameLogic {
 				}
 			}
 		}
-		// System.out.println("Inversions = " + countInversions);
 		return countInversions % 2 == 0;
 	}
 
 	public boolean isSolved(int[] tileNrs) {
+				
 		if (tileNrs[tileNrs.length - 1] != 16) { // if hole is not in the solved position ==> not solved
 			System.out.print("NOT Solved | ");
 			return false;
@@ -33,6 +33,9 @@ public class GameLogic {
 			}
 		}
 		System.out.println("Solved!");
+		ButtonBar.timeControl.setStarted(false);
+		ButtonBar.btnStart.setText("Start");
+		ButtonBar.timeControl.stop();
 		return true;
 	}
 

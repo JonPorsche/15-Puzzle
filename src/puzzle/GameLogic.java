@@ -36,6 +36,9 @@ public class GameLogic {
 		ButtonBar.timeControl.setStarted(false);
 		ButtonBar.btnStart.setText("Start");
 		ButtonBar.timeControl.stop();
+		int time = ButtonBar.timeControl.getElapsedTime();
+		WriteJSON writeResult = new WriteJSON(time);
+		writeResult.writeResult();
 		return true;
 	}
 

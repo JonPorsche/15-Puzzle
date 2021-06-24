@@ -37,12 +37,17 @@ public class TimeControl {
 		this.started = started;
 	}
 
+	public int getElapsedTime() {
+		return elapsedTime;
+	}
+
 	public void start() {
 		timer.start();
 	}
 	
 	public void stop() {
 		timer.stop();
+		System.out.println("Elapsed time = " + elapsedTime);
 	}
 	
 	public void reset() {

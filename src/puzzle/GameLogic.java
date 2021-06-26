@@ -20,7 +20,7 @@ public class GameLogic {
 	}
 
 	public boolean isSolved(int[] tileNrs) {
-				
+
 		if (tileNrs[tileNrs.length - 1] != 16) { // if hole is not in the solved position ==> not solved
 			System.out.print("NOT Solved | ");
 			return false;
@@ -37,8 +37,13 @@ public class GameLogic {
 		ButtonBar.btnStart.setText("Start");
 		ButtonBar.timeControl.stop();
 		int time = ButtonBar.timeControl.getElapsedTime();
-		WriteJSON writeResult = new WriteJSON(time);
-		writeResult.writeResult();
+		System.out.println("New time = " + time);
+		WriteJSON write = new WriteJSON(time);
+		ReadJSON read = new ReadJSON();
+		if (time < read.readResult()) {
+			System.out.println("Time is < than readed result = New Record!");
+			write.writeResult();
+		}
 		return true;
 	}
 
@@ -46,7 +51,7 @@ public class GameLogic {
 
 		int[] baseArray = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
 		int newNr = 0;
-		
+
 		for (int i = 0; i < baseArray.length - 1; i++) {
 			int randomIndexToSwap = RANDOM.nextInt(baseArray.length - 1);
 			int temp = baseArray[randomIndexToSwap];
@@ -54,7 +59,7 @@ public class GameLogic {
 			baseArray[i] = temp;
 		}
 
-		for (int i = 0; i < elements.length-1; i++) {
+		for (int i = 0; i < elements.length - 1; i++) {
 			newNr = baseArray[i];
 			elements[i].setNumber(newNr);
 		}

@@ -9,6 +9,10 @@ public class InfoPanel {
 	public static JLabel movesLabel = new JLabel("Moves: 0");
 	
 	public void setUpInfoPanel() {
+		
+		ReadJSON readJson = new ReadJSON();
+		readJson.readResult();
+		
 		timeLabel.setBounds(500, 20, 100, 20);
 		timeLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		timeLabel.setOpaque(true);

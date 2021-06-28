@@ -1,5 +1,8 @@
 package puzzle;
 
+import javax.swing.Icon;
+import javax.swing.JOptionPane;
+
 import jserver.BoardClickEvent;
 import jserver.BoardClickListener;
 import jserver.XSendAdapterEN;
@@ -69,6 +72,7 @@ public class GameBoard implements BoardClickListener {
 			getTileNrs();
 			count++;
 		} while (!gameLogic.isSolvable(tileNrs));
+
 //		System.out.println("Shufled: " + count + " times.");
 
 //		gameLogic.easyModus(elements);
@@ -140,12 +144,21 @@ public class GameBoard implements BoardClickListener {
 			 * time record: 1. Write the new time in the file 2. Update the best time label
 			 * with new time
 			 */
+			
+			boolean newBestTime = gameLogic.isBestTime(newTime);
+			if (newBestTime) {
+				JOptionPane.showMessageDialog(null, "Puzzle solved with new best time!", "Result",
+						JOptionPane.INFORMATION_MESSAGE);
+			}
+			else JOptionPane.showMessageDialog(null, "Puzzle solved!", "Result", JOptionPane.INFORMATION_MESSAGE);
 
 			if (read.readResult() == 0 || gameLogic.isBestTime(newTime)) {
 				System.out.println("Entered if");
+				System.out.println("Is best time? " + newBestTime);
 				write.writeResult(newTime);
 				InfoPanel.updateBestTimeLabel(newTime);
 			}
+
 		}
 	}
 

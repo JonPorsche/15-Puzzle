@@ -3,7 +3,6 @@ package puzzle;
 import jserver.Board;
 import jserver.XSendAdapterEN;
 import plotter.Graphic;
-import plotter.*;
 
 public class FifteenPuzzle {
 

@@ -4,8 +4,8 @@ import jserver.BoardClickEvent;
 import jserver.BoardClickListener;
 import jserver.XSendAdapterEN;
 
-public class GameBoard implements BoardClickListener{
-	
+public class GameBoard implements BoardClickListener {
+
 	private static final int BOARD_SIZE = 4;
 	private GameElement[] elements = new GameElement[BOARD_SIZE * BOARD_SIZE];
 	private int clickedPosition1D;
@@ -15,36 +15,37 @@ public class GameBoard implements BoardClickListener{
 	private Move move = new Move();
 	private int movesCount = 0;
 	private GameElement gameElement = new GameElement();
+	private ButtonBar buttonBar = new ButtonBar();
 
 	public GameBoard() {
 		super();
 		// TODO Auto-generated constructor stub
-	}	
-	
-	public void setMoves(int moves) {
-		this.movesCount = moves;
+	}
+
+	public void setMovesCount(int movesCount) {
+		this.movesCount = movesCount;
 	}
 
 	public GameElement[] getElements() {
 		return elements;
 	}
-	
+
 	public void setElements(GameElement[] elements) {
 		this.elements = elements;
 	}
-	
+
 	public void setElementsNrs(GameElement[] elements) {
-		for(int i = 0; i < elements.length; i++) {
+		for (int i = 0; i < elements.length; i++) {
 			this.elements[i].setNumber(elements[i].getNumber());
 		}
 	}
 
 	private void getTileNrs() {
-		for(int i = 0; i < elements.length; i++) {
+		for (int i = 0; i < elements.length; i++) {
 			tileNrs[i] = elements[i].getNumber();
 		}
 	}
-	
+
 	public int getHolePosition1D() {
 		return holePosition1D;
 	}
@@ -56,20 +57,22 @@ public class GameBoard implements BoardClickListener{
 	public void setUpGameBoard() {
 		Renderer renderer = new Renderer();
 		FifteenPuzzle.BOARD.addClickListener(this);
-		
+		movesCount = 0;
 		createElements();
-		int count = 0;
 		
-		do {
-			gameLogic.shuffle(elements);
-			getTileNrs();
-			count++;
-		} while(!gameLogic.isSolvable(tileNrs));
-		
-		System.out.println("Shufled: " + count + " times.");
+		/*
+		 * int count = 0;
+		 * 
+		 * 
+		 * do { gameLogic.shuffle(elements); getTileNrs(); count++; } while
+		 * (!gameLogic.isSolvable(tileNrs)); System.out.println("Shufled: " + count +
+		 * " times.");
+		 */
+
+		gameLogic.easyModus(elements);
 		renderer.renderElements(elements);
 	}
-	
+
 	public void createElements() {
 		int index = 0;
 		int tileNumber;
@@ -77,8 +80,8 @@ public class GameBoard implements BoardClickListener{
 			for (int tileX = 0; tileX < 4; tileX++) {
 				tileNumber = index + 1;
 				if (tileNumber < 16) {
-					elements[index] = new GameElement(tileX, tileY, tileNumber, XSendAdapterEN.WHITE, XSendAdapterEN.BLUE,
-							XSendAdapterEN.LIGHTGRAY);
+					elements[index] = new GameElement(tileX, tileY, tileNumber, XSendAdapterEN.WHITE,
+							XSendAdapterEN.BLUE, XSendAdapterEN.LIGHTGRAY);
 				} else {
 					elements[index] = new GameElement(tileX, tileY, tileNumber, XSendAdapterEN.LIGHTGRAY,
 							XSendAdapterEN.LIGHTGRAY, XSendAdapterEN.LIGHTGRAY);
@@ -90,17 +93,17 @@ public class GameBoard implements BoardClickListener{
 
 	@Override
 	public void boardClick(BoardClickEvent click) {
-		
+
 		// Start the timer when the user clicks on the tiles
-		if(!ButtonBar.timeControl.isStarted()) {
+		if (!ButtonBar.timeControl.isStarted()) {
 			ButtonBar.timeControl.setStarted(true);
 			ButtonBar.timeControl.start();
 			ButtonBar.btnStart.setText("Stop");
 		}
-		
+
 		int clickedX = click.getX();
 		int clickedY = click.getY();
-		
+
 		// Get hole position. In other words, get (x, y) coords from tile number 16.
 		int[] hole = gameElement.getElement2DCoords(elements, 16);
 		int holeX = hole[0];
@@ -117,16 +120,45 @@ public class GameBoard implements BoardClickListener{
 
 		// Move tiles in the direction
 		moveElements(direction);
+
 		getTileNrs();
-		gameLogic.isSolved(tileNrs);		
+		System.out.println("Game is solved? " + gameLogic.isSolved(tileNrs));
+
+		if (gameLogic.isSolved(tileNrs)) {
+						
+			buttonBar.resetBtns();
+			int newTime = ButtonBar.timeControl.getElapsedTime();
+
+			WriteJSON write = new WriteJSON();
+			ReadJSON read = new ReadJSON();
+			
+			System.out.println("read.readResult() = " + read.readResult());
+			System.out.println("is best time? " + gameLogic.isBestTime(newTime));
+			
+			/*	If there is not record saved or the new time is better
+			 * 	than the time saved:
+			 * 	1. Write the new time in the file
+			 * 	2. Update the best time label with new time
+			 */
+			
+			/*
+			 * if (read.readResult() == 0 || gameLogic.isBestTime(newTime)) {
+			 * write.writeResult(newTime); InfoPanel.updateBestTimeLabel(newTime); }
+			 */
+			
+			if(gameLogic.isBestTime(newTime)) {
+				write.writeResult(newTime);
+				InfoPanel.updateBestTimeLabel(newTime);
+			}
+		}
 	}
-	
+
 	public void moveElements(int direction) {
-		
+
 		Renderer renderer = new Renderer();
-		
-		if(direction != 0) {
-			while(holePosition1D != clickedPosition1D) {
+
+		if (direction != 0) {
+			while (holePosition1D != clickedPosition1D) {
 				int newHolePosition1D = holePosition1D + direction;
 				int cachedTileNr = elements[newHolePosition1D].getNumber();
 				elements[newHolePosition1D].setNumber(16);

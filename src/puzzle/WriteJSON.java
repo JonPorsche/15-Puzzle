@@ -9,12 +9,11 @@ public class WriteJSON {
 
 	private int time;
 	
-	public WriteJSON(int time) {
+	public WriteJSON() {
 		super();
-		this.time = time;
 	}
 
-	public void writeResult() {
+	public void writeResult(int time) {
 		JSONObject gameResult = new JSONObject();
 		gameResult.put("time", time);
 		writeJSONFile(gameResult);

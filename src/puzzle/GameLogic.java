@@ -5,6 +5,7 @@ import java.util.Random;
 public class GameLogic {
 
 	private static final Random RANDOM = new Random();
+	private ReadJSON read = new ReadJSON();
 
 	public boolean isSolvable(int[] tileNrs) {
 		int countInversions = 0;
@@ -22,29 +23,22 @@ public class GameLogic {
 	public boolean isSolved(int[] tileNrs) {
 
 		if (tileNrs[tileNrs.length - 1] != 16) { // if hole is not in the solved position ==> not solved
-			System.out.print("NOT Solved | ");
 			return false;
 		}
 
 		for (int i = tileNrs.length - 1; i >= 0; i--) {
 			if (tileNrs[i] != i + 1) {
-				System.out.println("NOT Solved | ");
 				return false;
 			}
-		}
-		System.out.println("Solved!");
-		ButtonBar.timeControl.setStarted(false);
-		ButtonBar.btnStart.setText("Start");
-		ButtonBar.timeControl.stop();
-		int time = ButtonBar.timeControl.getElapsedTime();
-		System.out.println("New time = " + time);
-		WriteJSON write = new WriteJSON(time);
-		ReadJSON read = new ReadJSON();
-		if (time < read.readResult()) {
-			System.out.println("Time is < than readed result = New Record!");
-			write.writeResult();
-		}
+		}		  		
 		return true;
+	}
+
+	public boolean isBestTime(int newTime) {
+		int bestTime = read.readResult();
+		if (newTime < bestTime)
+			return true;
+		return false;
 	}
 
 	public void shuffle(GameElement[] elements) {
@@ -61,6 +55,17 @@ public class GameLogic {
 
 		for (int i = 0; i < elements.length - 1; i++) {
 			newNr = baseArray[i];
+			elements[i].setNumber(newNr);
+		}
+	}
+
+	// Just for testing
+	public void easyModus(GameElement[] elements) {
+		int[] startArray = { 1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 15, 9, 16, 13, 14 };
+		int newNr = 0;
+
+		for (int i = 0; i < elements.length; i++) {
+			newNr = startArray[i];
 			elements[i].setNumber(newNr);
 		}
 	}

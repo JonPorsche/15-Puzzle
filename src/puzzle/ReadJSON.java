@@ -10,6 +10,12 @@ import org.json.simple.parser.ParseException;
 
 public class ReadJSON {
 	
+	private boolean record;
+	
+	public boolean hasRecord() {
+		return record;
+	}
+
 	public int readResult() {
 		
 		JSONParser jsonParser = new JSONParser();
@@ -21,9 +27,11 @@ public class ReadJSON {
 			JSONObject jsonObj = (JSONObject) obj;
 			long timeLong = (long) jsonObj.get("time");
 			time = (int)timeLong;
+			record = true;
 			
 		} catch (FileNotFoundException e) {
 			System.out.printf("ERROR - A %s ocurred:\n\t%s\n", e.getClass().toString(), e.getMessage());
+			record = false;
 			time = 0;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -32,7 +40,6 @@ public class ReadJSON {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("Recorded time = " + time);
 		return time;
 	}
 }

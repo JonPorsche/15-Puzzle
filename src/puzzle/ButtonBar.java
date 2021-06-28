@@ -10,6 +10,9 @@ public class ButtonBar {
 	public static JButton btnStart = new JButton("Start");
 	public static TimeControl timeControl = new TimeControl();
 
+	public ButtonBar() {
+		super();
+	}
 
 	public void setUpButtonBar() {
 		FifteenPuzzle.GRAPHIC.addSouthComponent(btnNewGame);
@@ -26,6 +29,7 @@ public class ButtonBar {
 				timeControl.setStarted(false);
 				btnStart.setText("Start");
 				timeControl.reset();
+
 			}
 		});
 	}
@@ -39,6 +43,7 @@ public class ButtonBar {
 					timeControl.setStarted(true);
 					btnStart.setText("Stop");
 					timeControl.start();
+					InfoPanel.resetInfoPanel(timeControl.getElapsedTime());
 				}
 				else{
 					timeControl.setStarted(false);
@@ -47,5 +52,11 @@ public class ButtonBar {
 				}
 			}
 		});
+	}
+
+	public void resetBtns() {
+		timeControl.setStarted(false);
+		btnStart.setText("Start");
+		timeControl.stop();
 	}
 }

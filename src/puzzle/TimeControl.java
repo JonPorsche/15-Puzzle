@@ -12,11 +12,9 @@ public class TimeControl {
 	private String seconds_string = String.format("%02d", seconds);
 	private String minutes_string = String.format("%02d", minutes);
 	private GameBoard gameBoard = new GameBoard();
-
-	
 	private Timer timer = new Timer(1000, new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			elapsedTime+=1000;
+			elapsedTime += 1000;
 			seconds = (elapsedTime / 1000) % 60;
 			minutes = (elapsedTime / 60000) % 60;
 			seconds_string = String.format("%02d", seconds);
@@ -24,11 +22,11 @@ public class TimeControl {
 			InfoPanel.timeLabel.setText("Time: " + minutes_string + ":" + seconds_string);
 		}
 	});
-	
+
 	public TimeControl() {
 		super();
 	}
-	
+
 	public boolean isStarted() {
 		return started;
 	}
@@ -41,15 +39,23 @@ public class TimeControl {
 		return elapsedTime;
 	}
 
+	public String getSeconds_string() {
+		return seconds_string;
+	}
+
+	public String getMinutes_string() {
+		return minutes_string;
+	}
+
 	public void start() {
 		timer.start();
 	}
-	
+
 	public void stop() {
 		timer.stop();
 		System.out.println("Elapsed time = " + elapsedTime);
 	}
-	
+
 	public void reset() {
 		timer.stop();
 		elapsedTime = 0;
@@ -57,10 +63,16 @@ public class TimeControl {
 		minutes = 0;
 		seconds_string = String.format("%02d", seconds);
 		minutes_string = String.format("%02d", minutes);
-		InfoPanel.timeLabel.setText("Time: " + minutes_string + ":" + seconds_string);
 		gameBoard.setUpGameBoard();
-		gameBoard.setMoves(0);
-		InfoPanel.movesLabel.setText("Moves: 0");
+	}
+
+	public static String formatTime(int time) {
+		int toSeconds = (time / 1000) % 60;
+		int toMinutes = (time / 60000) % 60;
+		String toSeconds_string = String.format("%02d", toSeconds);
+		String toMinutes_string = String.format("%02d", toMinutes);
+		String formatedTime = toMinutes_string + ":" + toSeconds_string;
+		return formatedTime;
 	}
 
 }

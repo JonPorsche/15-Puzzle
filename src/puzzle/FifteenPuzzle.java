@@ -20,7 +20,7 @@ public class FifteenPuzzle {
 	}
 
 	public void start() {
-		BOARD.setSize(590, 500);
+		BOARD.setSize(620, 500);
 		BOARD.receiveMessage(">>fontsize 45");
 		BOARD.receiveMessage(">>fonttype Rockwell");
 		GRAPHIC.removeAllMenus();

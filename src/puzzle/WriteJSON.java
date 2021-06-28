@@ -17,6 +17,7 @@ public class WriteJSON {
 		JSONObject gameResult = new JSONObject();
 		gameResult.put("time", time);
 		writeJSONFile(gameResult);
+		System.out.println("New time writted in file.");
 	}
 
 	private void writeJSONFile(JSONObject gameResult) {

@@ -30,14 +30,16 @@ public class GameLogic {
 			if (tileNrs[i] != i + 1) {
 				return false;
 			}
-		}		  		
+		}
 		return true;
 	}
 
 	public boolean isBestTime(int newTime) {
 		int bestTime = read.readResult();
-		if (newTime < bestTime)
+		if (newTime < bestTime) {
+			System.out.println("New time is better than saved time");
 			return true;
+		}
 		return false;
 	}
 

@@ -25,10 +25,12 @@ public class ButtonBar {
 		btnNewGame.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("New game pressed.");
+				System.out.println("\nNew game pressed.");
+				btnStart.setEnabled(true);
 				timeControl.setStarted(false);
 				btnStart.setText("Start");
 				timeControl.reset();
+				InfoPanel.resetInfoPanel();
 
 			}
 		});
@@ -43,7 +45,6 @@ public class ButtonBar {
 					timeControl.setStarted(true);
 					btnStart.setText("Stop");
 					timeControl.start();
-					InfoPanel.resetInfoPanel(timeControl.getElapsedTime());
 				}
 				else{
 					timeControl.setStarted(false);
@@ -55,6 +56,8 @@ public class ButtonBar {
 	}
 
 	public void resetBtns() {
+		
+		System.out.println("Reset buttons");
 		timeControl.setStarted(false);
 		btnStart.setText("Start");
 		timeControl.stop();

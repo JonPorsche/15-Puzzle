@@ -11,6 +11,8 @@ public class GameBoard implements BoardClickListener {
 	private int clickedPosition1D;
 	private int holePosition1D;
 	private GameLogic gameLogic = new GameLogic();
+	WriteJSON write = new WriteJSON();
+	ReadJSON read = new ReadJSON();
 	private int[] tileNrs = new int[16];
 	private Move move = new Move();
 	private int movesCount = 0;
@@ -59,17 +61,17 @@ public class GameBoard implements BoardClickListener {
 		FifteenPuzzle.BOARD.addClickListener(this);
 		movesCount = 0;
 		createElements();
-		
-		/*
-		 * int count = 0;
-		 * 
-		 * 
-		 * do { gameLogic.shuffle(elements); getTileNrs(); count++; } while
-		 * (!gameLogic.isSolvable(tileNrs)); System.out.println("Shufled: " + count +
-		 * " times.");
-		 */
 
-		gameLogic.easyModus(elements);
+		int count = 0;
+
+		do {
+			gameLogic.shuffle(elements);
+			getTileNrs();
+			count++;
+		} while (!gameLogic.isSolvable(tileNrs));
+//		System.out.println("Shufled: " + count + " times.");
+
+//		gameLogic.easyModus(elements);
 		renderer.renderElements(elements);
 	}
 
@@ -122,31 +124,25 @@ public class GameBoard implements BoardClickListener {
 		moveElements(direction);
 
 		getTileNrs();
-		System.out.println("Game is solved? " + gameLogic.isSolved(tileNrs));
 
 		if (gameLogic.isSolved(tileNrs)) {
-						
-			buttonBar.resetBtns();
-			int newTime = ButtonBar.timeControl.getElapsedTime();
 
-			WriteJSON write = new WriteJSON();
-			ReadJSON read = new ReadJSON();
-			
-			System.out.println("read.readResult() = " + read.readResult());
-			System.out.println("is best time? " + gameLogic.isBestTime(newTime));
-			
-			/*	If there is not record saved or the new time is better
-			 * 	than the time saved:
-			 * 	1. Write the new time in the file
-			 * 	2. Update the best time label with new time
-			 */
-			
+			System.out.println("\nPuzzle is solved");
+
+			buttonBar.resetBtns();
+			ButtonBar.btnStart.setEnabled(false);
+
+			int newTime = ButtonBar.timeControl.getElapsedTime();
+			System.out.println("Elapsed time = " + newTime);
+
 			/*
-			 * if (read.readResult() == 0 || gameLogic.isBestTime(newTime)) {
-			 * write.writeResult(newTime); InfoPanel.updateBestTimeLabel(newTime); }
+			 * If the file doesn't has time records or the new time is better than the saved
+			 * time record: 1. Write the new time in the file 2. Update the best time label
+			 * with new time
 			 */
-			
-			if(gameLogic.isBestTime(newTime)) {
+
+			if (read.readResult() == 0 || gameLogic.isBestTime(newTime)) {
+				System.out.println("Entered if");
 				write.writeResult(newTime);
 				InfoPanel.updateBestTimeLabel(newTime);
 			}

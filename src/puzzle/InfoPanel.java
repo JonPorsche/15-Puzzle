@@ -57,9 +57,15 @@ public class InfoPanel {
 
 	}
 
-	public static void resetInfoPanel(int newTime) {
+	/*
+	 * public static void resetInfoPanel(int newTime) {
+	 * timeLabel.setText("Time: 00:00"); movesLabel.setText("Moves: 0");
+	 * updateBestTimeLabel(newTime); }
+	 */
+
+	public static void resetInfoPanel() {
 		timeLabel.setText("Time: 00:00");
 		movesLabel.setText("Moves: 0");
-		updateBestTimeLabel(newTime);
 	}
+
 }

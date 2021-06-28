@@ -26,11 +26,13 @@ public class ReadJSON {
 			Object obj = jsonParser.parse(reader);
 			JSONObject jsonObj = (JSONObject) obj;
 			long timeLong = (long) jsonObj.get("time");
-			time = (int)timeLong;
+			System.out.println("File has time records.");
 			record = true;
-			
+			time = (int)timeLong;
 		} catch (FileNotFoundException e) {
-			System.out.printf("ERROR - A %s ocurred:\n\t%s\n", e.getClass().toString(), e.getMessage());
+			System.out.printf("\nERROR - A %s ocurred:\n\t%s\n", e.getClass().toString(), e.getMessage());
+			System.out.println("\n");
+			System.out.println("File doesn't has time records");
 			record = false;
 			time = 0;
 		} catch (IOException e) {
